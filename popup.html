@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="popup.js"></script>
+    <title>WebLogger</title>
+</head>
+<body>
+    <div id="settings" style="float: right;">
+        <button id="import" title="Settings">
+            ⚙
+        </button>
+    </div>
+    <div id="active" style="display: none;">
+        <p>Active case: <span id="active_case"></span></p>
+        <p>Active researcher: <span id="active_researcher"></span></p>
+        <p>Active location <span id="active_location"></span></p>
+        <button id="new">New case</button>
+    </div>
+    <div id="setup">
+        <p>Select existing case</p>
+        <select id="known_cases" style="width: 100%;">
+            <option value=""></option>
+        </select>
+        <span id="selected" style="display: none;"></span>
+        <button id="submitCase">Select case</button>
+        <p>Initial setup</p>
+        <input id="name" type="text" name="name" placeholder="Researcher name">
+        <input id="location" type="text" name="location" placeholder="Researcher location">
+        <input type="text" name="project" id="project" placeholder="Project name">
+        <button id="submit">Save</button>
+    </div>
+    <div id="operate" style="display: none;">
+        <p>Log a page</p>
+        <input type="checkbox" disabled name="add_to_coc" id="coc"><span>Add page to CoC WIP</span>
+        <br>
+        <input type="checkbox" name="screenshot_page" id="screenshot"><span>Take a screenshot of the page</span>
+        <input type="text" name="what" id="what" placeholder="What" style="width: 90%;"><input type="checkbox" name="default" id="default" title="Use default line">
+        <input type="text" name="why" id="why" placeholder="Why">
+        <input type="text" name="result" id="result" placeholder="Result">
+        <button id="log">Log</button>
+        <button id="clear">Clear log</button>
+        <span id="logError" style="color: red; font-weight: bold;"></span>
+        <button id="download">Download log</button>
+        <button id="cache">Cache What, Why and Result</button>
+    </div>
+    <div id="imageThumb">
+        <img id="actualImg" alt="Screenshot taken" style="width: 300; display: none;">
+        <button id="downloadImg" style="display: none;">Download screenshot</button>
+    </div>
+</body>
+</html>

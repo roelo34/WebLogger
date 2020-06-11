@@ -1,0 +1,26 @@
+{
+    "manifest_version": 2,
+    "name": "WebLogger",
+    "version": "0.1",
+    "description": "Log web activity straight to csv without hassle.",
+    "author": "Roel Huizing",
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_title": "WebLogger"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "tabs", "storage", "downloads", "unlimitedStorage", "activeTab"
+    ]
+}

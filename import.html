@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="import.js"></script>
+    <title>Import case</title>
+</head>
+<body>
+    <div id="importing">
+        <h1>Import existing case</h1>
+        <p>Import a previously created csv logfile. The logfile has to have been made by WebLogger in order to import correctly.</p>
+        <p>If you want to try to import a non-standard log anyway, make sure the format is as follows:</p>
+        <table style="border-style: solid;">
+                <th>Who</th>
+                <th>Where</th>
+                <th>When</th>
+                <th>What</th>
+                <th>Why</th>
+                <th>How</th>
+                <th>Result</th>
+                <th>Query</th>
+                <th>URL</th>
+                <th>Case name</th>
+        </table>
+        <br>
+        <input type="file" name="fileInput" id="fileInput" style="display: none;">
+        <button id="importCsv" title="Derive a case from a log csv file. Also imports all lines from the logfile, removing duplicates if they exist.">
+            Choose file
+        </button>
+        <p id="importSuccess" style="color: green; font-weight: bold; font-family: Arial, Helvetica, sans-serif;"></p>
+    </div>
+    <div id="scrname">
+        <h1>!WIP Set name for screenshots WIP!</h1>
+        <p>By default, the names for the screenshots follow this format:</p>
+        <p>ProjectName_ResearcherName_CurrentDatetime.png</p>
+        <p>When setting a custom filename, you can use these options:</p>
+        <ul>
+            <li>%R for researcher name</li>
+            <li>%D for current date</li>
+            <li>%T for current time</li>
+            <li>%P for project name</li>
+            <li>%U for URL</li>
+        </ul>
+        <br>
+        <input type="text" name="scrName" id="scrName">
+        <button disabled id="setScrName">Set name</button>
+    </div>
+</body>
+</html>
