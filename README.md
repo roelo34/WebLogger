@@ -21,3 +21,4 @@ If you have any suggestions, you can send me a message or fork the repo.
 * Full-page screenshots
 * CoC generation
 * Custom log headers
+* Nicer styling
