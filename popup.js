@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("loaded")
 
     document.getElementById("submit").addEventListener("click", submit, false)
     document.getElementById("new").addEventListener("click", newcase, false)
@@ -9,7 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("cache").addEventListener("click", cache, false)
     document.getElementById("submitCase").addEventListener("click", submitCase, false)
     document.getElementById("import").addEventListener("click", importCase, false)
+    document.getElementById("autolog").addEventListener("click", autoLog, false)
     
+    checkAutoLog()
 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {action: "getCases"}, (result) => {
@@ -122,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var screenshot = document.getElementById("screenshot").checked;
         var cocadd = document.getElementById("coc").checked;
         var url = await getUrl()
+        console.log(url)
         if (screenshot) {
             var imageB64 = await screenshotPage()
             console.log(imageB64)
@@ -137,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
             imageThumb.style.display = "block"
         }
         if (defaultline) {
-            what = `Gebrowsed naar ${url.url}`
+            what = `Gebrowsed naar ${url[0].url}`
         }
         var logObject = {
             "who": researcher,
@@ -206,7 +208,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("active_case").textContent = result.status.project
                 document.getElementById("active_researcher").textContent = result.status.name
                 document.getElementById("active_location").textContent = result.status.location
-                document.getElementById("active_logfile").textContent = result.status.file_location
                 document.getElementById("logError").textContent = ""
             })
         
@@ -273,6 +274,34 @@ document.addEventListener("DOMContentLoaded", function() {
               }
         }
         reader.readAsText(file);
+    }
+
+    function checkAutoLog() {
+        chrome.storage.local.get(['auto'], (result) => {
+            if (result.auto == undefined || result.auto == false) {
+                document.getElementById("autolog").style.color = "red"
+            } else {
+                document.getElementById("autolog").style.color = "green"
+            }
+        })
+    }
+
+    function autoLog() {
+        var who = document.getElementById("active_researcher").textContent
+        var where = document.getElementById("active_location").textContent
+        var project = document.getElementById("active_case").textContent
+        chrome.storage.local.get(['auto'], (result) => {
+            if (result.auto == undefined || result.auto == false) {
+                chrome.storage.local.set({auto: true})
+                chrome.storage.local.set({activeCase: {who: who, where: where, case: project}})
+                document.getElementById("autolog").style.color = "green"
+            } else {
+                chrome.storage.local.set({auto: false})
+                chrome.storage.local.set({activeCase: undefined})
+                document.getElementById("autolog").style.color = "red"
+            }
+        })
+
     }
 
     

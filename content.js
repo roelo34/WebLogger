@@ -202,7 +202,7 @@ async function logLine(logObject) {
         "why": logObject.why,
         "how": referer,
         "query": searchQuery,
-        "url": logObject.url,
+        "url": url,
         "result": logObject.result,
         "case": logObject.case,
         "screenshot": logObject.screenshot,
@@ -249,4 +249,18 @@ async function sha256(message) {
     // convert bytes to hex string                  
     const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
     return hashHex;
+}
+
+window.onload = function() {
+    chrome.storage.local.get(['auto'], (result) => {
+        if (result.auto == undefined || result.auto == false) {
+            return
+        } else {
+            this.getFields().then((fields) => {
+                chrome.storage.local.get(['cached'], (cached) => {
+                    // Hiero
+                })
+            })
+        }
+    })
 }

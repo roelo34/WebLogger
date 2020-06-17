@@ -21,6 +21,6 @@
         "persistent": false
     },
     "permissions": [
-        "tabs", "storage", "downloads", "unlimitedStorage", "activeTab"
+        "tabs", "storage", "downloads", "unlimitedStorage", "activeTab", "webNavigation"
     ]
 }
